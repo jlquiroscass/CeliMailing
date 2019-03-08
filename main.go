@@ -39,6 +39,10 @@ func sendMail(w http.ResponseWriter, r *http.Request) {
 	var Recipient = mail.To
 	var Subject = mail.Subject
 	var HtmlBody = mail.Body
+
+	fmt.Println(mail.address)
+	fmt.Println(mail.HtmlBody)
+	fmt.Println(mail.Subject)
 	// Create a new session in the eu-west-1 region.
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String("eu-west-1")},
