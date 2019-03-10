@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -13,21 +12,17 @@ import (
 )
 
 const (
-	// Replace sender@example.com with your "From" address.
-	// This address must be verified with Amazon SES.
-	Sender = "comunicacion@celicidad.net"
-	//The email body for recipients with non-HTML email clients.
-	TextBody = "This email was sent with Amazon SES using the AWS SDK for Go."
-
 	// The character encoding for the email.
 	CharSet = "UTF-8"
 )
 
 // Mail The mail Type (more like an object)
 type Mail struct {
-	Subject string `json:"subject,omitempty"`
-	To      string `json:"to,omitempty"`
-	Body    string `json:"body,omitempty"`
+	Subject 	string `json:"subject,omitempty"`
+	To      	string `json:"to,omitempty"`
+	Body    	string `json:"body,omitempty"`
+	Sender  	string `json:"sender,omitempty"`
+	TextBody  	string `json:"txtBody,omitempty"`
 }
 
 // send mail
@@ -38,6 +33,8 @@ func sendMail(w http.ResponseWriter, r *http.Request) {
 	var Recipient = mail.To
 	var Subject = mail.Subject
 	var HtmlBody = mail.Body
+	var Sender = mail.Sender
+	var TextBody = mail.TextBody
 
 	// Create a new session in the eu-west-1 region.
 	sess, err := session.NewSession(&aws.Config{
