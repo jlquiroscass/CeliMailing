@@ -10,7 +10,7 @@ WORKDIR $GOPATH/src/jlquiros/CeliMail/
 COPY . .
 # Fetch dependencies.
 # Using go get.
-RUN go get -d -v
+#RUN go get -d -v
 # Build the binary.
 RUN go build 
 RUN pwd
