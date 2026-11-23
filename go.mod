@@ -1,4 +1,4 @@
-module net.celicidad.net/CeliMail
+module github.com/jlquiroscass/CeliMailing
 
 go 1.16
 
