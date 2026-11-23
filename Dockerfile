@@ -8,8 +8,8 @@ RUN apk update && apk add --no-cache git
 
 WORKDIR $GOPATH/src/jlquiros/CeliMail/
 COPY . .
-# Build the binary.
-RUN go build 
+# Build the binary with a fixed name, whatever the module is called.
+RUN CGO_ENABLED=0 go build -o /mail
 RUN pwd
 RUN ls -lart
 RUN mkdir ~/.aws && \
@@ -25,4 +25,4 @@ RUN mkdir ~/.aws && \
 #RUN ls -lart /go/bin/
 EXPOSE 6565
 # Run the hello binary.
-ENTRYPOINT ["./CeliMail"]
+ENTRYPOINT ["/mail"]
