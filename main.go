@@ -23,6 +23,7 @@ type Mail struct {
 	Body    	string `json:"body,omitempty"`
 	Sender  	string `json:"sender,omitempty"`
 	TextBody  	string `json:"txtBody,omitempty"`
+	ReplyTo 	string `json:"replyTo,omitempty"`
 }
 
 // send mail
@@ -69,6 +70,9 @@ func sendMail(w http.ResponseWriter, r *http.Request) {
 			},
 		},
 		Source: aws.String(Sender),
+	}
+	if mail.ReplyTo != "" {
+		input.ReplyToAddresses = []*string{aws.String(mail.ReplyTo)}
 	}
 
 	// Attempt to send the email.
